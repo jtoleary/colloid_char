@@ -1,0 +1,81 @@
+Branched Graphlet Decomposition Code
+====================================
+
+Branched Graphlet Decomposition (BGD) is accomplished by creating and evaluating structural and compositional neighborhood graphs via a modified version of the crayon package (available at: https://github.com/wfreinhart/crayon and described in Reinhart, W. F.; Panagiotopoulos, A. Z. Automated Crystal Characterization with a Fast Neighborhood Graph Analysis Method. Soft Matter 2018, 14, 6083–6089. https://doi.org/10.1039/c8sm00960k).
+
+The crayon package source code can be modified according to the instructions provided in the "modification" folder.
+
+The example_gdv.zip directory provides an example.xyz file and .gdv and vapor.npy files that are created by running the crayon package. Instructions for running this package (that are still valid with the modified code) can be found at the GitHub link above and in the instructions section below.
+
+IMPORTANT: Crayon requires Python2.7 (and not Python3)
+
+ALSO IMPORTANT: If you cannot figure out how to modify the crayon package, we have a private script that we can provide you that will automatically generate .gdv and vapor.npy files from .xyz files. Please contact us if this is the case!
+
+Instructions
+============
+
+1. To get GDVs printed out:
+#################################################################################
+
+In the classifiers.py, please add this line below line 54:
+#################################################################################
+        print ('gdv_main',self.s) #RM added, gdvs fo each particles
+
+
+2. To obtain structural and compositioanl neighborhood graphs in the form of .gdv files:
+#################################################################################
+
+In the neighborlist.py, please add following lines below line 379:
+#################################################################################
+        #### RM added 10-28-2020 Lehigh
+          if snap.tag == 'same':
+            if self.clustering:
+                nn = self.filterNeighbors(idx,idx,nl,snap)
+                if idx <snap.total_na:
+                   nn = nn[nn<snap.total_na]
+                else:
+                   nn = nn[nn>=snap.total_na]
+            else:
+                nn = nl[idx]
+            all_neighbors.append(np.array(nn,dtype=np.int))
+          elif snap.tag == 'diff':
+            if self.clustering:
+                nn = self.filterNeighbors(idx,idx,nl,snap)
+                if idx <snap.total_na:
+                   nn = nn[nn>=snap.total_na]
+                   nn=np.append(nn,idx)
+                else:
+                   nn = nn[nn<snap.total_na]
+                   nn=np.append(nn,idx)
+            else:
+                nn = nl[idx]
+            all_neighbors.append(np.array(nn,dtype=np.int))
+          elif snap.tag == 'all':
+            if self.clustering:
+                nn = self.filterNeighbors(idx,idx,nl,snap)
+            else:
+                nn = nl[idx]
+            all_neighbors.append(np.array(nn,dtype=np.int))
+           #### RM added 10-28-2020 Lehigh
+
+In the nga.py, please add following entry for particle counts below line 49:
+#################################################################################
+        #self.total_na = None #RM added
+        if self.xyz is not None:
+            self.N = len(self.xyz)
+        else:
+            self.N = None
+        # RM added
+
+3. To obtain the vapor information (i.e., the vapor.npy files):
+#################################################################################
+
+In neighborlist.py, please add following entry for extracting particle counts below line 381 in the original crayon file or under line 405 in the provided example neighborlist.py file
+#################################################################################
+print (idx,nn)
+
+,and set the rcut equals to the desired cutoff VP_CUT under crayon.neighborlist.Cutoff() 
+nlcluster.setParams(rcut=VP_CUT)
+
+The particle count for each particle is the summation of all neighbor particle within this cutoff 
+
