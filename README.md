@@ -11,7 +11,7 @@ Code for the dimensionality reduction and clustering framework steps can be foun
 
 The Example folder contains the following:
 
-Example_Data.zip --> The folder labeled "1.0" contains 10 trajectories of the colloidal self-assembly of a binary system of equally-sized particles. The folder labeled "1.5" contains 10 trajectories of the colloidal self-assembly of a binary system of particles with a 5% size disparity. The subfolders refer to different A/B interaction strengths
+Example_Data_1/2.zip --> The folder labeled "1.0" contains 10 trajectories of the colloidal self-assembly of a binary system of equally-sized particles. The folder labeled "1.05" contains 10 trajectories of the colloidal self-assembly of a binary system of particles with a 5% size disparity. The subfolders refer to different A/B interaction strengths
 
 Train.zip --> This folder contains the results of the characterization framework on these 20 trajectories.
 
@@ -33,7 +33,7 @@ Please direct all questions to jared.oleary@berkeley.edu.
   volume={},
   number={},
   pages={},
-  year={2021},
+  year={2022},
   publisher={}
 }
 
