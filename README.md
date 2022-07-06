@@ -20,7 +20,7 @@ Train_example.ipynb --> This shows Train.py from the main folder filled out for 
 core.py --> Identical copy of core.py from main folder (for ease)
 
 # Notes
-The method here is an improved version of the method originally reported in "Deep learning for characterizing the self-assembly of three-dimensional colloidal systems" (O'Leary, et al., 2021). This paper only focused on the "structrual" neighborhood graphs and low-dimensional spaces mentioned in this repository.
+The method here is an improved version of the method originally reported in "Deep learning for characterizing the self-assembly of three-dimensional colloidal systems" (O'Leary, et al., 2021). This paper only focused on the "structural" neighborhood graphs and low-dimensional spaces mentioned in this repository.
 
 # Help
 Please direct all questions to jared.oleary@berkeley.edu.
