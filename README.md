@@ -26,15 +26,12 @@ The method here is an improved version of the method originally reported in "Dee
 Please direct all questions to jared.oleary@berkeley.edu.
 
 # Citation
-@article{mao2021branched,
-  title={Branched graphlet decomposition with deep learning for structural and compositional characterization of three-dimensional binary colloidal superlattices},
-  author={Mao, Runfang and O'Leary, Jared and Mesbah, Ali and Mittal, Jeetain},
-  journal={Submitted},
-  volume={},
-  number={},
-  pages={},
+@article{mao2022deep,
+  title={A Deep Learning Framework Discovers Compositional Order and Self-Assembly Pathways in Binary Colloidal Mixtures},
+  author={Mao, Runfang and O’Leary, Jared and Mesbah, Ali and Mittal, Jeetain},
+  journal={JACS Au},
   year={2022},
-  publisher={}
+  publisher={ACS Publications}
 }
 
 @article{o2021deep,
