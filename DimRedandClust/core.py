@@ -994,8 +994,20 @@ def get_combined_cluster_ids(target_clust_st, target_clust_co):
 ###############################################################################
 
 ###############################################################################
-def assign_clusters_combined(target_comb, clust_ids_all_st_ind, 
-                             clust_ids_all_co_ind, traj_dir, encoder_dir):
+def get_st_class_cluster_ids(target_clust_st):
+
+    target_st = {}
+    count = 1
+    for key in target_clust_st:
+        target_st[key] = [target_clust_st[key], count]
+        count += 1
+    
+    return target_comb
+###############################################################################
+
+###############################################################################
+def assign_clusters_comb(target_comb, clust_ids_all_st_ind, 
+                         clust_ids_all_co_ind, traj_dir, encoder_dir):
     
     n_comb_class = 2*len(target_comb) + 1
     
@@ -1026,9 +1038,39 @@ def assign_clusters_combined(target_comb, clust_ids_all_st_ind,
     
     return clust_ids_comb
 ###############################################################################
+
+###############################################################################
+def assign_clusters_st_class(target_st, clust_ids_all_st_ind, traj_dir, encoder_dir):
+    
+    n_class = target_st + 1
+    
+    clust_ids_st_class = []
+    for i in range(0, len(clust_ids_all_st_ind)):
+        clust_id = n_class
+        for key in target_st:
+            if target_st[key][0] == clust_ids_all_st_ind[i]:
+                clust_id = target_st[key][1]
+                break
+        clust_ids_st_class.append(clust_id)
+            
+    # Convert to array
+    clust_ids_comb = np.asarray(clust_ids_comb)
+        
+    # Create directory where cluster ids will be saved
+    clust_path = os.path.join(encoder_dir, traj_dir)
+    if os.path.isdir(clust_path) == False:
+        os.makedirs(clust_path) 
+    
+    # Save cluster labels
+    np.save(os.path.join(clust_path, "Struct_Class_Cluster_IDs_" +
+                         str(np.max(clust_ids_comb)) +
+                         "_Clusters.npy"), clust_ids_comb)
+    
+    return clust_ids_comb
+###############################################################################
     
 ###############################################################################
-def assign_colors(target_comb, mother_dir):
+def assign_colors_comb(target_comb, mother_dir):
     
     # Create ordered list of colors where list index corresponds to
     # cluster ID. Note that light colors correspond to compositionally-
@@ -1066,6 +1108,47 @@ def assign_colors(target_comb, mother_dir):
         colors_dict['CO-' + key] = colors_list[count]
         colors_dict['CD-' + key] = colors_list[count+1]
         count = count + 2
+
+    # Save colors dictionary
+    f = open(mother_dir + "/color_assignments.txt","w")
+
+    # write file
+    f.write( str(colors_dict) )
+
+    # close file
+    f.close()
+    
+    return colors_list, colors_dict
+###############################################################################
+
+###############################################################################
+def assign_colors_st(target_st, mother_dir):
+    
+    # Create ordered list of colors where list index corresponds to
+    # cluster ID. 
+    # This code currently has 8 available colors but more can be added.
+    
+    colors_available = []
+    colors_available.append(['Red', 238, 32, 77])
+    colors_available.append(['Green', 28, 172, 120])
+    colors_available.append(['Blue', 31, 117, 254])
+    colors_available.append(['Brown', 180, 103, 77])
+    colors_available.append(["Violet", 146,110,174])
+    colors_available.append(["Gray", 149, 145, 140])
+    colors_available.append(["Orange", 255,117,56])
+    
+    colors_list = []
+    for i in range(0, len(target_st):
+        colors_list.append(colors_available[i])
+    
+    colors_list.append(["White", 237,237,237])
+    
+    # Create colors dictionary
+    colors_dict = {}
+    count = 0
+    for key in target_st:
+        colors_dict['SO-' + key] = colors_list[count]
+        count += 1
 
     # Save colors dictionary
     f = open(mother_dir + "/color_assignments.txt","w")
