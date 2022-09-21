@@ -30,6 +30,9 @@ Please direct all questions to jared.oleary@berkeley.edu.
   title={A Deep Learning Framework Discovers Compositional Order and Self-Assembly Pathways in Binary Colloidal Mixtures},
   author={Mao, Runfang and O’Leary, Jared and Mesbah, Ali and Mittal, Jeetain},
   journal={JACS Au},
+  volume={2},
+  number={8},
+  pages={1818--1828},
   year={2022},
   publisher={ACS Publications}
 }
