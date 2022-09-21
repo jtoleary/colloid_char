@@ -182,7 +182,6 @@ def process_gdv_comp(data_dir, unique_clean = False):
         return gdv_comp
 ###############################################################################    
 
-
 ###############################################################################
 def process_gdvs_train_struct(traj_dirs, mother_dir):
     
